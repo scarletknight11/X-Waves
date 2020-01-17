@@ -1,1 +1,1 @@
-# TourettesVR
+# X-Waves
