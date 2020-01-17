@@ -19,7 +19,7 @@ public class test : MonoBehaviour {
 		Vector2 pos = Input.mousePosition;//Input.GetTouch (0).position;
 
 		source.pitch =  Mathf.Pow(2, ((pos[0] / Screen.height) * 10 + (pos[1] / Screen.width) * -4)/12.0f);  
-		Debug.Log (((pos[0] / Screen.height) * 10) + " " + ((pos[1] / Screen.width) * -4));
+		//Debug.Log (((pos[0] / Screen.height) * 10) + " " + ((pos[1] / Screen.width) * -4));
 
 
 	}
