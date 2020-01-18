@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/XWaves/Scenes/EmptyScene.unity
     guid: 102ec66d67b1d4913a8a47657c1e8982
-  - enabled: 1
+  - enabled: 0
     path: Assets/XWaves/Scenes/HelloCube.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/MagicLeap/Examples/Scenes/Controller.unity
+    guid: 62a07dca92e019646a2932bacb6d4387
+  - enabled: 0
+    path: Assets/MagicLeap/Examples/Scenes/AudioCapture.unity
+    guid: ff47925fa63e39e438c7db235b18fff9
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: c05eb9a1abbbe1645aec1ecbdf8fdcbd,
       type: 2}

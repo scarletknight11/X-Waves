@@ -52,6 +52,8 @@ namespace MagicLeap
             MLInput.OnControllerButtonUp += HandleOnButtonUp;
             MLInput.OnControllerButtonDown += HandleOnButtonDown;
             MLInput.OnTriggerDown += HandleOnTriggerDown;
+            MLInput.OnControllerTouchpadGestureContinue += OnTouchContinue;
+            
         }
 
         /// <summary>
@@ -71,6 +73,12 @@ namespace MagicLeap
             MLInput.OnControllerButtonDown -= HandleOnButtonDown;
             MLInput.OnControllerButtonUp -= HandleOnButtonUp;
         }
+
+       
+
+
+
+
         #endregion
 
         #region Private Methods
@@ -128,7 +136,6 @@ namespace MagicLeap
                 button == MLInputControllerButton.Bumper)
             {
                 // Demonstrate haptics using callbacks.
-                controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.ForceDown, MLInputControllerFeedbackIntensity.Medium);
             }
         }
 
@@ -162,6 +169,29 @@ namespace MagicLeap
                 controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, intensity);
             }
         }
+
+        private void OnTouchContinue(byte controllerId, MLInputControllerTouchpadGesture touchpadGesture)
+        {
+            MLInputController controller = _controllerConnectionHandler.ConnectedController;
+
+            if (controller != null && controller.Id == controllerId)
+            {
+                if(Mathf.Abs(controller.Touch1PosAndForce.x) + Mathf.Abs(controller.Touch1PosAndForce.z) > 1)
+                {
+                    controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Tick, MLInputControllerFeedbackIntensity.High);
+
+                }
+                else if (Mathf.Abs(controller.Touch1PosAndForce.x) + Mathf.Abs(controller.Touch1PosAndForce.z) > 0)
+
+                {
+                    controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Click, MLInputControllerFeedbackIntensity.Medium);
+
+                }
+            }
+
+
+        }
+
         #endregion
     }
 }

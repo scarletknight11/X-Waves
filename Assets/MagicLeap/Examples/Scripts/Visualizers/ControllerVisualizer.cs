@@ -128,6 +128,8 @@ namespace MagicLeap
             // Calculate the radius of the touchpad's mesh
             Mesh mesh = _touchpad.GetComponent<MeshFilter>().mesh;
             _touchpadRadius = Vector3.Scale(mesh.bounds.extents, _touchpad.transform.lossyScale).x;
+
+            source = GetComponent<AudioSource>();
         }
 
         /// <summary>
@@ -164,6 +166,8 @@ namespace MagicLeap
             }
         }
 
+        public AudioSource source;
+
         /// <summary>
         /// Update the touchpad's indicator: (location, directions, color).
         /// Also updates the color of the touchpad, based on pressure.
@@ -177,10 +181,18 @@ namespace MagicLeap
             MLInputController controller = _controllerConnectionHandler.ConnectedController;
             Vector3 updatePosition = new Vector3(controller.Touch1PosAndForce.x, 0.0f, controller.Touch1PosAndForce.y);
             float touchY = _touchIndicatorTransform.localPosition.y;
+
             _touchIndicatorTransform.localPosition = new Vector3(updatePosition.x * _touchpadRadius / MagicLeapDevice.WorldScale, touchY, updatePosition.z * _touchpadRadius / MagicLeapDevice.WorldScale);
+
+            source.pitch = Mathf.Pow(2, (updatePosition.x * 10 + updatePosition.z * -4) / 12.0f);
+
+            
+            
 
             if (controller.Touch1Active)
             {
+                controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Tick, MLInputControllerFeedbackIntensity.Medium);
+
                 _touchIndicatorTransform.gameObject.SetActive(true);
                 float angle = Mathf.Atan2(controller.Touch1PosAndForce.x, controller.Touch1PosAndForce.y);
                 _touchIndicatorTransform.localRotation = Quaternion.Euler(0, angle * Mathf.Rad2Deg, 0);
@@ -309,6 +321,10 @@ namespace MagicLeap
                 }
             }
         }
+
+        
+
+
         #endregion
     }
 }
