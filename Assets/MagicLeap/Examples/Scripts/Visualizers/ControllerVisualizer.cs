@@ -185,7 +185,7 @@ namespace MagicLeap
             _touchIndicatorTransform.localPosition = new Vector3(updatePosition.x * _touchpadRadius / MagicLeapDevice.WorldScale, touchY, updatePosition.z * _touchpadRadius / MagicLeapDevice.WorldScale);
 
             source.pitch = Mathf.Pow(2, (updatePosition.x * 10 + updatePosition.z * -4) / 12.0f);
-
+           
             
             
 

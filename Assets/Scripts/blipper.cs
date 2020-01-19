@@ -6,10 +6,9 @@ public class blipper : MonoBehaviour
 {
 
     public AudioSource source;
+    public AudioClip clip;
     public Animator blipLight;
     public Animator blipOcean;
-
-    int finishedCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +19,14 @@ public class blipper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(source.clip.length);
-        if (-source.time + source.clip.length < 0.1f)
+        if (!source.isPlaying)
         {
-                blipLight.SetTrigger("blip");
-                blipOcean.SetTrigger("blip");
+            //source.Stop();
+            Debug.Log(source.clip.length);
+
+            source.Play();
+            blipLight.SetTrigger("blip");
+            blipOcean.SetTrigger("blip");
         }
         
     }

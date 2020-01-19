@@ -13,7 +13,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.XR.MagicLeap;
-
+using UnityEngine.UI;
 namespace MagicLeap
 {
     /// <summary>
@@ -24,10 +24,16 @@ namespace MagicLeap
     [RequireComponent(typeof(ControllerConnectionHandler))]
     public class ControllerTransform : MonoBehaviour
     {
+
         #region Private Variables
+        public Text text;
         private ControllerConnectionHandler _controllerConnectionHandler;
 
         private Camera _camera;
+        //Vector3 controller_acceleration;
+        //Vector3 controller_velocity = new Vector3(0f, 0f, 0f);
+        //Vector3[] Position = new Vector3[3];
+
 
         // MobileApp-specific variables
         private bool _isCalibrated = false;
@@ -57,6 +63,11 @@ namespace MagicLeap
             if (_controllerConnectionHandler.IsControllerValid())
             {
                 MLInputController controller = _controllerConnectionHandler.ConnectedController;
+                //controller_acceleration = (gameObject.GetComponent<Rigidbody>().velocity - controller_velocity) / Time.deltaTime;
+                //text.text = "last_velocity" + controller_velocity.ToString() + "\n"
+                //    + "v" + gameObject.GetComponent<Rigidbody>().velocity + "\n"
+                //    + "acce:" + controller_acceleration.magnitude.ToString();
+                //controller_velocity = (gameObject.GetComponent<Rigidbody>().velocity);
                 if (controller.Type == MLInputControllerType.Control)
                 {
                     // For Control, raw input is enough

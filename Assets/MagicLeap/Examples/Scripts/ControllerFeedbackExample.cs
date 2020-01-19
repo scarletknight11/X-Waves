@@ -139,6 +139,8 @@ namespace MagicLeap
             }
         }
 
+        public GameObject island;
+        bool isActive = false;
         /// <summary>
         /// Handles the event for button up.
         /// </summary>
@@ -152,6 +154,7 @@ namespace MagicLeap
             {
                 // Demonstrate haptics using callbacks.
                 controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.ForceUp, MLInputControllerFeedbackIntensity.Medium);
+               
             }
         }
 
@@ -167,6 +170,19 @@ namespace MagicLeap
             {
                 MLInputControllerFeedbackIntensity intensity = (MLInputControllerFeedbackIntensity)((int)(value * 2.0f));
                 controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, intensity);
+
+                if (isActive)
+                {
+                    island.GetComponent<Animator>().SetTrigger("disappear");
+                    GetComponent<AudioSource>().volume = 0;
+                }
+                else
+                {
+                    island.GetComponent<Animator>().SetTrigger("appear");
+                    GetComponent<AudioSource>().volume = 0.4f;
+                }
+                isActive = !isActive;
+
             }
         }
 
@@ -174,7 +190,7 @@ namespace MagicLeap
         {
             MLInputController controller = _controllerConnectionHandler.ConnectedController;
 
-            if (controller != null && controller.Id == controllerId)
+            if (isActive && controller != null && controller.Id == controllerId)
             {
                 if(Mathf.Abs(controller.Touch1PosAndForce.x) + Mathf.Abs(controller.Touch1PosAndForce.z) > 1)
                 {

@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MagicLeap/Examples/Scenes/AudioCapture.unity
     guid: ff47925fa63e39e438c7db235b18fff9
+  - enabled: 0
+    path: Assets/MagicLeap/Examples/Scenes/Raycast.unity
+    guid: 6c94c849b074e2c4883092293f337b1f
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: c05eb9a1abbbe1645aec1ecbdf8fdcbd,
       type: 2}
